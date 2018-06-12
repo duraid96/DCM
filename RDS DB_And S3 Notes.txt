@@ -1,0 +1,50 @@
+** Create an RDS DB Instance
+
+1. To launch a MySQL DB instance
+
+	1.1: Go to Services and choose RDS under Database/ Choose Instances, Choose Launch DB instance / 	On the Select engine page, shown following/ choose MySQL, and then choose Next.
+
+	1.2: On the Choose use case page, choose Dev/Test – MySQL, and then choose Next/ On the Specify DB details page, shown following, set these values:
+•	License model: Use the default value.
+•	DB engine version: Use the default value.
+•	DB instance class: db.t2.small
+•	Multi-AZ deployment: No
+•	Storage type: General Purpose (SSD)
+•	Allocated storage: 20 GiB
+•	DB instance identifier: tutorial-db-instance
+•	Master username: tutorial_user
+•	Master password: Choose a password.
+•	Confirm password: Retype the password.
+
+
+Endpoint:
+tutorial-db-instance.cg1cwfsoswh0.eu-west-1.rds.amazonaws.com
+
+
+Port:
+3306
+
+
+From your EC2 instance (Web Server)  CLI (open host [[-l] user][- 3306])
+host is the "Endpoint"/ and user is the RDS "Master username"
+
+First install mysql into your ec2 instace using below command 
+
+sudo yum install mysql
+sudo yum install mysql-server mysql-client
+
+After installing mysql try with below cmd to connect RDS
+
+** mysql -h hostname -u username - p password
+
+mysql -h tutorial-db-instance.cg1cwfsoswh0.eu-west-1.rds.amazonaws.com -u tutorial_user -p Pa$$w0rd2 -P 3306
+
+mysql -h tutorial-db-instance.cg1cwfsoswh0.eu-west-1.rds.amazonaws.com -P 3306 -u tutorial_user -p
+
+
+mysql -h tutorial-db-instance.cg1cwfsoswh0.eu-west-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem --ssl-verify-server-cert -p
+
+mysql -h tutorial-db-instance.cg1cwfsoswh0.eu-west-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem -p
+
+
+mysql -h tutorial-db-instance.cg1cwfsoswh0.eu-west-1.rds.amazonaws.com --ssl-ca=rds-ca-2015-root.pem -p

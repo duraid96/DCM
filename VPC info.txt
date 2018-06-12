@@ -1,0 +1,27 @@
+** Create an Amazon VPC for use with an Amazon RDS DB Instance
+
+1. Create a VPC with Private and Public Subnets
+	1.1 select "VPC with Public and Private Subnets"
+
+	1.2 Select IPv4 CIDR block: 10.0.0.0/16/ Name a VPC: tutorial-vpc/ select the public subnet: 10.0.0.0/24/ select Availability 	Zone: us-west-2a/ choose a public subnet name: Tutorial Public/ choose name for Private subnet: Tutorial Private Subnet 1/ 	choose instance type: t2.small. 
+
+2. Create Additional Subnets
+	2.1 go to VPC Dashboard then Subnets/ click on "create subnet"/ choose a name tag: Tutorial private 2/ choose the previous 		created VPC which is "tutorial-vpc"/ choose diff Availability Zone: us-west-2b/ select IPv4 CIDR block: 10.0.2.0/24
+
+	2.2 Make sure both "Route Table" of the private subnets are similar, if not click edit first private subnet and change to the 	private subnet 2. 
+
+3. Create a VPC Security Group for a Public Web Server
+	3.1 Go to "VPC Dashboard" click on "Security Groups" and "Create Security Group"/ Name tage: tutorial-securitygroup/ Group 		name: tutorial-securitygroup/ Description: Tutorial Security Group/ VPC: Choose the VPC that you created earlier, for 			example: vpc-identifier(10.0.0.0/16) OR tutorial-vpc.
+
+	3.2 (To add inbound rules to the security group) / "https://checkip.amazonaws.com" check the IP address that you will connect 	to instances in the VPC. or use 0.0.0.0/0 for LAB use only.
+
+	3.3 Go to "VPC Dashboard" then "Security Groups"/ select (tutorial-securitygroup)/ Edit Inbound rules select service such as 		SSH or http and the IP address or range of IPs.
+
+4. Create a VPC Security Group for a Private Amazon RDS DB Instance
+	4.1 Go to "VPC Dashboard" click on "Security Groups" and "Create Security Group"/ Name tag: tutorial-db-securitygroup/ Group 		name: tutorial-db-securitygroup/ Description: Tutorial DB Instance Security Group/ VPC: Choose the VPC that you 			created earlier, for example: vpc-identifier(10.0.0.0/16) OR tutorial-vpc
+
+	4.2 (To add inbound rules to the security group)/ choose the "tutorial-db-securitygroup" security group that you created in 		the previous procedure/ Edit Inbound rules which are Type: MySQL/Aurora (3306) and Source: The identifier of the "tutorial-		securitygroup". 
+
+5. Create a DB Subnet Group
+	5.1 Go to RDS page from "Services" / choose "Subnet groups"/ select "Create DB Subnet Group"/ set values which are Name: 		"tutorial-db-subnet-group"/ Description: Tutorial DB Subnet Group/ VPC: tutorial-vpc (vpc-identifier)
+

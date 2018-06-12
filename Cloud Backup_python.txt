@@ -1,0 +1,5 @@
+s3 bucket name:		ubuntubackuppoly4
+search for "IAM" in the aws search bar then select the user "duraid.alghadban" then select security credentials.
+
+AWS Access Key ID:	AKIAI7UPCAOU36OHJQVA
+AWS Secret Access Key ID:		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
